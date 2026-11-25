@@ -1,3 +1,4 @@
+
 <!doctype html>
 <html lang="en-GB">
 <head>
@@ -1657,8 +1658,12 @@ fieldset legend {
     display: block;
   }
   .project-card.flagship .project-visual {
+    height: auto;
     aspect-ratio: 16/9;
     min-height: 0;
+  }
+  .project-card.flagship .project-placeholder .placeholder-label {
+    z-index: 1;
   }
   .project-card .project-body {
     padding: 25px;
@@ -2017,7 +2022,7 @@ fieldset legend {
 @media(max-width:550px) { .live-showcase { margin-top: 28px; } .live-cover { min-height: 260px; padding: 30px 16px; } }
 
   </style>
-  <title>Sabr &amp; Shawq</title>
+  <title>Sabr and Shawq</title>
 
 </head>
 <body>
@@ -2370,18 +2375,18 @@ function route() {
         p = PROJECTS.find(x => x.id === path.split('/')[1]);
     if (p) {
         app.innerHTML = renderCase(p);
-        document.title = `${p.name} | Sabr & Shawq`;
+        document.title = 'Sabr and Shawq';
     }
     else if (entry) {
         if (path === 'home')
             entry.render();
         else
             app.innerHTML = entry.render();
-        document.title = `${entry.title} | Sabr & Shawq`;
+        document.title = 'Sabr and Shawq';
     }
     else {
         app.innerHTML = subhero('404 / A different path', 'The way <em>home.</em>', 'This page could not be found.') + '<section class="section shell"><a class="btn btn-gold" href="#/home">Return home</a></section>';
-        document.title = 'Page not found | Sabr & Shawq';
+        document.title = 'Sabr and Shawq';
     }
     $$('#site-nav a').forEach(a => { const active = a.getAttribute('href') === `#/${section}`; a.classList.toggle('active', active); if (active)
         a.setAttribute('aria-current', 'page');
