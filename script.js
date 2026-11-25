@@ -271,18 +271,18 @@ function route() {
         p = PROJECTS.find(x => x.id === path.split('/')[1]);
     if (p) {
         app.innerHTML = renderCase(p);
-        document.title = `${p.name} | Sabr & Shawq`;
+        document.title = 'Sabr & Shawq';
     }
     else if (entry) {
         if (path === 'home')
             entry.render();
         else
             app.innerHTML = entry.render();
-        document.title = `${entry.title} | Sabr & Shawq`;
+        document.title = 'Sabr & Shawq';
     }
     else {
         app.innerHTML = subhero('404 / A different path', 'The way <em>home.</em>', 'This page could not be found.') + '<section class="section shell"><a class="btn btn-gold" href="#/home">Return home ↗</a></section>';
-        document.title = 'Page not found | Sabr & Shawq';
+        document.title = 'Sabr & Shawq';
     }
     $$('#site-nav a').forEach(a => { const active = a.getAttribute('href') === `#/${section}`; a.classList.toggle('active', active); if (active)
         a.setAttribute('aria-current', 'page');
