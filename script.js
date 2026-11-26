@@ -101,7 +101,18 @@ function art(type = 'summit') {
     return `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs><linearGradient id="${sky}" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#050608"/><stop offset=".58" stop-color="#0e1e35"/><stop offset="1" stop-color="#142b4d"/></linearGradient><radialGradient id="${glow}"><stop stop-color="#29486d" stop-opacity=".4"/><stop offset="1" stop-color="#0a1224" stop-opacity="0"/></radialGradient><mask id="${moon}"><rect width="1600" height="900" fill="black"/><circle cx="1290" cy="167" r="47" fill="white"/><circle cx="1308" cy="150" r="45" fill="black"/></mask></defs><rect width="1600" height="900" fill="url(#${sky})"/><ellipse cx="1050" cy="450" rx="900" ry="460" fill="url(#${glow})"/><g class="art-stars">${stars}</g>${orb}${scenery}</svg>`;
 }
 function hydrateArt(root = document) { $$('[data-art]', root).forEach(el => { el.innerHTML = art(el.dataset.art); }); }
-function icon(name) { const paths = { email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>', phone: '<path d="M8 3H4c-1 0-1 2-1 3 0 8 7 15 15 15 1 0 3 0 3-1v-4l-5-2-2 3a14 14 0 0 1-7-7l3-2Z"/>', instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/>', facebook: '<path d="M14 21v-8h3l1-4h-4V7c0-1 1-2 3-2h1V2h-3c-4 0-5 2-5 5v2H7v4h3v8"/>' }; return `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[name] || ''}</svg>`; }
+
+function icon(name) {
+    const paths = {
+        email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+        phone: '<path d="M8 3H4c-1 0-1 2-1 3 0 8 7 15 15 15 1 0 3 0 3-1v-4l-5-2-2 3a14 14 0 0 1-7-7l3-2Z"/>',
+        instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/>',
+        facebook: '<path d="M14 21v-8h3l1-4h-4V7c0-1 1-2 3-2h1V2h-3c-4 0-5 2-5 5v2H7v4h3v8"/>'
+    };
+
+    return `<svg viewBox="0 0 24 24" aria-hidden="true">${paths[name] || ''}</svg>`;
+}
+
 const verse = () => '<div class="verse"><p>God is with the patient.</p><span>2 : 153</span></div>';
 function contactLink(type, label) { const value = CONFIG[type]; if (!value)
     return `<a href="#/contact">${icon(type)}${label}</a>`; return `<a href="${type === 'email' ? 'mailto:' : 'tel:'}${escapeHTML(type === 'phone' ? value.replace(/[^+\d]/g, '') : value)}">${icon(type)}${label}</a>`; }
