@@ -104,7 +104,7 @@ function hydrateArt(root = document) { $$('[data-art]', root).forEach(el => { el
 
 function icon(name) {
     const paths = {
-        email: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
+        mail: '<rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/>',
         phone: '<path d="M8 3H4c-1 0-1 2-1 3 0 8 7 15 15 15 1 0 3 0 3-1v-4l-5-2-2 3a14 14 0 0 1-7-7l3-2Z"/>',
         instagram: '<rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r=".8"/>',
         facebook: '<path d="M14 21v-8h3l1-4h-4V7c0-1 1-2 3-2h1V2h-3c-4 0-5 2-5 5v2H7v4h3v8"/>'
@@ -114,7 +114,18 @@ function icon(name) {
 }
 
 const verse = () => '<div class="verse"><p>God is with the patient.</p><span>2 : 153</span></div>';
-function contactLink(type, label) { const value = CONFIG[type]; if (!value)
+
+function contactLink(type, label) {
+    const value = CONFIG[type];
+    const iconName = type === 'email' ? 'mail' : type;
+
+    if (!value) {
+        return `<a href="#/contact">${icon(iconName)}${label}</a>`;
+    }
+
+    return `<a href="${type === 'email' ? 'mailto:' : 'tel:'}${escapeHTML(type === 'phone' ? value.replace(/[^+\d]/g, '') : value)}">${icon(iconName)}${label}</a>`;
+}
+
     return `<a href="#/contact">${icon(type)}${label}</a>`; return `<a href="${type === 'email' ? 'mailto:' : 'tel:'}${escapeHTML(type === 'phone' ? value.replace(/[^+\d]/g, '') : value)}">${icon(type)}${label}</a>`; }
 function footer() { return `<div class="footer-main"><div class="footer-side"><p class="eyebrow">Contact</p>${contactLink('email', 'Email us')}${contactLink('phone', 'Call us')}</div><div class="footer-brand"><a href="#/home" aria-label="Return to home"><img src="sabr-emblem.png" alt="" width="80" height="42"></a><a href="#/home" class="wordmark">Sabr <span>&amp;</span> Shawq</a>${verse()}</div><div class="footer-side"><p class="eyebrow">Follow us</p><a href="${CONFIG.instagram}" target="_blank" rel="noopener noreferrer">Instagram ${icon('instagram')}</a><a href="${CONFIG.facebook}" target="_blank" rel="noopener noreferrer">Facebook ${icon('facebook')}</a></div></div><div class="footer-bottom"><span>© ${new Date().getFullYear()} Sabr &amp; Shawq. All rights reserved. <small class="build-marker">Build 3.1</small></span><nav aria-label="Footer navigation"><a href="#/reviews">Reviews</a><a href="#/faq">FAQ</a><a href="#/privacy">Privacy</a><a href="#/terms">Terms</a></nav></div>`; }
 function subhero(kicker, title, desc, illustration = 'celestial') { return `<section class="subhero"><div class="landscape" data-art="${illustration}" aria-hidden="true"></div><div class="shell"><p class="eyebrow">${kicker}</p><h1>${title}</h1><p class="lead">${desc}</p></div></section>`; }
